@@ -38,7 +38,7 @@ export const Form = ({ setUrl }: formProps) => {
         <Center>
           <Input
             type="text"
-            placeholder="画像"
+            placeholder="検索したい画像"
             maxW="800px"
             value={value}
             onChange={handleChange}
