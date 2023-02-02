@@ -1,11 +1,31 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import HomeLayout from '../components/layouts/homeLayout'
 import { Heading } from '@chakra-ui/react'
 import { Form } from '../components/elements/form'
+import { useEffect, useState } from 'react'
+import { usePixabayDataSWR } from '../hooks/usePixabayDataSWR'
+import { fetcher } from '../libs/fetcher'
+import axios from 'axios'
+import { Result } from '../components/elements/result'
 
 const Home: NextPage = () => {
+  const [url, setUrl] = useState<string>('')
+  const [imgData, setImgData] = useState()
+  useEffect(() => {
+    if (url != '') {
+      // TODO swrを使ってAPIデータを取得する
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      // const { data, isLoading, isError } = usePixabayDataSWR(url)
+      // const { data, error } = useSWR(url, fetcher)
+      axios.get(url).then(res => {
+        const imgData = res.data.hits
+        setImgData(imgData)
+      })
+    }
+  }, [url])
   return (
     <div className={styles.container}>
       <Head>
@@ -15,10 +35,17 @@ const Home: NextPage = () => {
       </Head>
       <HomeLayout title="pixabay-app">
         <Heading as="h1">pixabay-app</Heading>
-        <Form></Form>
+        <Form setUrl={setUrl}></Form>
+        <Result imgData={imgData}></Result>
       </HomeLayout>
     </div>
   )
 }
 
 export default Home
+function useSWR(
+  url: string,
+  fetcher: (url: string) => Promise<() => Promise<any>>
+): { data: any; error: any } {
+  throw new Error('Function not implemented.')
+}
