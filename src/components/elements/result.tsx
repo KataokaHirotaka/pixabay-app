@@ -24,6 +24,7 @@ export const Result = ({ imgData }: resultProps) => {
           <Flex direction="column" gridGap={2}>
             {imgData.map(
               (item: {
+                [x: string]: any
                 id: Key | null | undefined
                 largeImgURL: string | undefined
               }) => {
