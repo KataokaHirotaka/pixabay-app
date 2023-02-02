@@ -1,5 +1,13 @@
 /* eslint-disable react/jsx-key */
-import { Center, Container, Grid, GridItem, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  Center,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+} from '@chakra-ui/react'
 import { Key } from 'react'
 import { resultProps } from '~/src/types'
 
@@ -9,11 +17,11 @@ export const Result = ({ imgData }: resultProps) => {
   if (imgData) {
     return (
       <Container>
-        <Center>
-          <Heading>検索結果</Heading>
+        <Center mt="22px">
+          <Heading as="h2">検索結果</Heading>
         </Center>
-        <Center>
-          <Grid>
+        <Center mt="22px">
+          <Flex direction="column" gridGap={2}>
             {imgData.map(
               (item: {
                 id: Key | null | undefined
@@ -22,15 +30,13 @@ export const Result = ({ imgData }: resultProps) => {
                 const id = item.id
                 const imgUrl = item.largeImageURL
                 return (
-                  <GridItem>
-                    <div key={id}>
-                      <img src={imgUrl}></img>
-                    </div>
-                  </GridItem>
+                  <div key={id}>
+                    <img src={imgUrl}></img>
+                  </div>
                 )
               }
             )}
-          </Grid>
+          </Flex>
         </Center>
       </Container>
     )
