@@ -19,7 +19,9 @@ export const Form = ({ setUrl }: formProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const api_key = process.env.NEXT_PUBLIC_API_KEY
+    // TODO 別サーバーを立ててAPIキーを隠蔽する
+    // const api_key = process.env.NEXT_PUBLIC_API_KEY
+    const api_key = '33280253-2607c07303b5c1c8a32b1e97b'
     const url = `https://pixabay.com/api/?key=${api_key}&q=${value}`
     setUrl(url)
   }
