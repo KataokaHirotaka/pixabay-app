@@ -1,3 +1,3 @@
 export type resultProps = {
-  imgData?: any
+  url: string
 }
